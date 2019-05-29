@@ -1,0 +1,32 @@
+DROP TABLE IF EXISTS user;
+DROP TABLE IF EXISTS room;
+DROP TABLE IF EXISTS user_room;
+
+CREATE TABLE user (
+    
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT NOT NULL,
+    last_name TEXT NOT NULL,
+    username TEXT UNIQUE NOT NULL,
+    type INTEGER NOT NULL DEFAULT 0,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE room (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    address TEXT NOT NULL,
+    available INTEGER NOT NULL DEFAULT 1
+);
+
+CREATE TABLE user_room (
+
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    user_id INTEGER NOT NULL,
+    room_id INTEGER NOT NULL,
+    finished TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES user (id)  
+    FOREIGN KEY (room_id) REFERENCES room (id)
+);

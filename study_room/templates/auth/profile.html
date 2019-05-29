@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    {% block title %}
+        {% if g.user %}
+        <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title">Profile</h5>
+                    <h6 class="card-subtitle mb-2 text-muted"></h6>
+                    <p class="card-text">
+                        <b>First Name: </b> {{ g.user['first_name'] }} <br/>
+                        <b>Last Name: </b> {{ g.user['last_name'] }} <br/>
+                        <b>Username: </b> {{ g.user['Username']}}
+                    </p>
+                </div>
+              </div>
+
+        {% else %}
+            <h1>Please loging to to see your profile info.</h1>
+        {% endif %}
+    {% endblock %}
+{% endblock %}

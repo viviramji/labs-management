@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %} {% endblock %}</h1>
+  {% if g.user == 0 %}
+    <a class="action" href="#">New</a>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+
+<div class="jumbotron">
+
+    {% if g.user %}
+        <h1 class="display-4">Welcome, {{ g.user['first_name'] }}.</h1>
+        <h5>Showing laboratories:</h5> 
+        <table class="table" style="text-align: center;">
+            <thead>
+                <tr>
+                    <th>Name </th>
+                    <th>Address </th>
+                    <th>Available</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for room in rooms %}
+                    <tr>
+                        <td> {{ room['name'] }} </td>
+                        <td> {{ room['address'] }} </td>
+                        <td> {{ 'Ready' if room['available'] else 'Busy' }} </td>
+                        {% if g.user['type'] == 0 %}
+                        <td><a href="{{ url_for('room.update', id=room['id'], state=room['available']) }}">Change state</a></td>
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+    {% else %}
+        <h1 class="display-4">Welcome!</h1>
+        <p class="lead">Please log in or sign up to verified if there's any English Laboratory available.</p>
+        <hr class="my-4">
+        
+        <div class="row">
+            <div class="col-md-6" style="text-align: center;">
+                <a class="btn btn-primary btn-lg btn-block" href="{{ url_for('auth.login') }}" role="button">Log in</a>
+            </div>
+            <div class="col-md-6"  style="text-align: center;">
+                <a class="btn btn-secondary btn-lg btn-block" href="{{ url_for('auth.register') }}" role="button">Sign Up</a>
+            </div>
+        </div>
+    {% endif %}
+    
+</div>
+
+{% endblock %}
