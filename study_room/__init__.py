@@ -24,10 +24,10 @@ def create_app(test_config=None):
 
     from . import db
     db.init_app(app)
-
+    #autenticacion
     from . import auth
     app.register_blueprint(auth.bp)
-
+    #laboratorios
     from . import room
     app.register_blueprint(room.bp)
     app.add_url_rule('/', endpoint='index')

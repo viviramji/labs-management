@@ -17,12 +17,6 @@ def register():
         password = request.form['password']
         db = get_db()
         error = None
-        
-        print(first_name)
-        print(last_name)
-        print(username)
-        print(password)
-        print(" ****** " + str(type_user))
 
         if not (first_name and last_name and str(type_user) and username and password):
             error = "Please fill all requiered fields"

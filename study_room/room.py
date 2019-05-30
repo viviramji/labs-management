@@ -46,4 +46,3 @@ def update(id, state):
     )
     db.commit()
     return redirect(url_for('room.index'))
-
